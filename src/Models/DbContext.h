@@ -12,7 +12,9 @@ class DbContext {
         uint16_t actual;
         bool isOnProgramming;
         bool aRebootIsNeeded;
+        uint8_t digitPosition;
         time_t startTime;
+        uint8_t cluster;
         // EEPROM Registers (Volatile memory)
         DbSetEEPROM<byte> deviceIdEEPROM = DbSetEEPROM<byte>(1);
         DbSetEEPROM<uint16_t> planEEPROM = DbSetEEPROM<uint16_t>(1,deviceIdEEPROM.lastPosition());

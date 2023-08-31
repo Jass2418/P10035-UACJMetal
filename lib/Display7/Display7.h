@@ -58,4 +58,19 @@ public:
     static int yellow;
 };
 
+class DisplaySegment
+{
+private:
+    /* data */
+public:
+    static int A;
+    static int B;
+    static int C;
+    static int D;
+    static int E;
+    static int F;
+    static int G;
+    static int dot;
+};
+
 #endif

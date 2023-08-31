@@ -5,6 +5,7 @@
 
 #define MIN_VALUE 0
 #define MAX_VALUE 9999
+#define MAX_DIGIT_POS 4
 class ButtonTask {
     public:
         static void setup(){
@@ -24,14 +25,34 @@ class ButtonTask {
                 db.actual = 0;
 
             if (programBtn.pressed()){
-                db.isOnProgramming = !db.isOnProgramming;
-                if(!db.isOnProgramming)
+                if(db.digitPosition >= MAX_DIGIT_POS){
+                    db.isOnProgramming = false;
+                    db.digitPosition = 0;
                     db.planEEPROM.add(db.plan);
+                }
+                else {
+                    db.isOnProgramming = true;
+                    db.digitPosition++;
+                }
             }
-            if (incrementBtn.pressed() && db.isOnProgramming)
-                db.plan++;
-            if (decrementBtn.pressed() && db.isOnProgramming) 
-                db.plan--;
+            if (incrementBtn.pressed() && db.isOnProgramming){
+                uint16_t multipler = 1;
+                for (int i = 0; i < db.digitPosition - 1; i++)
+                    multipler *= 10;
+                if(((db.plan / multipler) % 10) != 9)
+                    db.plan += multipler;
+                else
+                    db.plan -= (multipler * 9);
+            }
+            if (decrementBtn.pressed() && db.isOnProgramming) {
+                uint16_t multipler = 1;
+                for (int i = 0; i < db.digitPosition - 1; i++)
+                    multipler *= 10;
+                if(((db.plan / multipler) % 10) != 0)
+                    db.plan -= multipler;
+                else
+                    db.plan += (multipler * 9);
+            }
             // Validation Values
             if(db.plan <= MIN_VALUE)
                 db.plan = MIN_VALUE;

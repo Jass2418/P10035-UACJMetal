@@ -14,6 +14,7 @@ class SystemTask {
             db.actual = db.actualEEPROM.get();
             setTime(DEFAULT_TIME);
             db.startTime = now();
+            db.digitPosition = 0;
         };
         static void loop(){
             // Reboot with Flag

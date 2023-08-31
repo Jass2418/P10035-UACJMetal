@@ -15,8 +15,13 @@ class DisplayTask {
                     isBlinking = !isBlinking;
                 else
                     isBlinking = false;
-
-                display.setDisplay(db.plan,4,!isBlinking);
+                // Cluster Output
+                display.setDisplayRaw(db.cluster);
+                // Display Values
+                display.setDigit(db.plan / 1000,false,(db.isOnProgramming && db.digitPosition==4) ? isBlinking : true);
+                display.setDigit((db.plan / 100) % 10 ,false,(db.isOnProgramming && db.digitPosition==3) ? isBlinking : true);
+                display.setDigit((db.plan / 10) % 10,false,(db.isOnProgramming && db.digitPosition==2) ? isBlinking : true);
+                display.setDigit(db.plan % 10,false,(db.isOnProgramming && db.digitPosition==1) ? isBlinking : true);
                 display.setDisplay(db.actual,4);
                 if(db.plan >= db.actual)
                     display.setDisplay(db.plan - db.actual,4);

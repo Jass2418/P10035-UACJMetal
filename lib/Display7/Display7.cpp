@@ -143,3 +143,13 @@ int DisplayCluster::off = 0;
 int DisplayCluster::red = 128;
 int DisplayCluster::green = 32;
 int DisplayCluster::yellow = 64;
+
+// Display Segment
+int DisplaySegment::A = 1;
+int DisplaySegment::B = 2;
+int DisplaySegment::C = 4;
+int DisplaySegment::D = 8;
+int DisplaySegment::E = 16;
+int DisplaySegment::F = 32;
+int DisplaySegment::G = 64;
+int DisplaySegment::dot = 128;
